@@ -11,12 +11,12 @@ public class CreateSaleUseCase extends UseCase<RequestCommand<CreateSale>, Respo
     @Override
     public void executeUseCase(RequestCommand<CreateSale> createCafeRequestCommand) {
         var command = createCafeRequestCommand.getCommand();
-        var cafe = new Sale(
+        var sale = new Sale(
                 command.getSaleID(),
                 command.getCoffeeShopName(),
                 command.getDateOfSale()
         );
 
-        emit().onResponse(new ResponseEvents(cafe.getUncommittedChanges()));
+        emit().onResponse(new ResponseEvents(sale.getUncommittedChanges()));
     }
 }

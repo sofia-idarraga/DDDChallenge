@@ -31,7 +31,7 @@ public class Sale extends AggregateEvent<SaleID> {
     protected Set <Product> products;
     public Sale(SaleID entityId, CoffeeShopName coffeeShopName, DateOfSale dateOfSale) {
         super(entityId);
-        appendChange(new SaleCreated(coffeeShopName)).apply();
+        appendChange(new SaleCreated(coffeeShopName,dateOfSale)).apply();
     }
 
     private Sale(SaleID saleID){
