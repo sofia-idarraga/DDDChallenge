@@ -2,11 +2,13 @@ package com.sofka.ddd.domain.sale;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.ddd.domain.sale.events.ClientAdded;
 import com.sofka.ddd.domain.sale.events.CoffeeShopNameUpdated;
 import com.sofka.ddd.domain.sale.events.ProductAdded;
 import com.sofka.ddd.domain.sale.events.ProductNameUpdated;
 import com.sofka.ddd.domain.sale.values.BaristaID;
 import com.sofka.ddd.domain.sale.values.ClientID;
+import com.sofka.ddd.domain.sale.values.ContactNumber;
 import com.sofka.ddd.domain.sale.values.DateOfSale;
 import com.sofka.ddd.domain.sale.values.Name;
 import com.sofka.ddd.domain.sale.values.Price;
@@ -15,6 +17,7 @@ import com.sofka.ddd.domain.sale.values.Type;
 import com.sofka.ddd.domain.generics.CoffeeShopName;
 import com.sofka.ddd.domain.sale.events.SaleCreated;
 import com.sofka.ddd.domain.sale.values.SaleID;
+import com.sofka.ddd.domain.sale.values.VipStatus;
 
 import java.util.List;
 import java.util.Objects;
@@ -59,9 +62,19 @@ public class Sale extends AggregateEvent<SaleID> {
     }
     //------------
 
+    //----------- BEHAVIORS
+
     public void updateCoffeeShopName(CoffeeShopName coffeeShopName){
         Objects.requireNonNull(coffeeShopName);
         appendChange(new CoffeeShopNameUpdated(coffeeShopName)).apply();
+    }
+
+    public void addClient(ClientID entityID, Name name, ContactNumber contactNumber, VipStatus vipStatus){
+        Objects.requireNonNull(entityID);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(contactNumber);
+        Objects.requireNonNull(vipStatus);
+        appendChange(new ClientAdded(entityID,name,contactNumber,vipStatus)).apply();
     }
 
     public void addProduct(ProductID entityID, Name name, Price price, Type type){
@@ -79,6 +92,8 @@ public class Sale extends AggregateEvent<SaleID> {
     }
 
     //-----
+
+    //----- ACCESS
 
     public CoffeeShopName coffeeShopNameoffeeShopName() {
         return coffeeShopName;

@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class CreateSaleUseCaseTest {
 
-
     @Test
     public void createSaleCaseTest(){
         //Arrange
