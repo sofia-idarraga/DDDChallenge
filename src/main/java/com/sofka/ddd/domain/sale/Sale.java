@@ -77,4 +77,26 @@ public class Sale extends AggregateEvent<SaleID> {
         Objects.requireNonNull(name);
         appendChange(new ProductNameUpdated(productID,name)).apply();
     }
+
+    //-----
+
+    public CoffeeShopName coffeeShopNameoffeeShopName() {
+        return coffeeShopName;
+    }
+
+    public DateOfSale dateOfSale() {
+        return dateOfSale;
+    }
+
+    public Set<Client> clients() {
+        return clients;
+    }
+
+    public Set<Barista> baristas() {
+        return baristas;
+    }
+
+    public Set<Product> products() {
+        return products;
+    }
 }
