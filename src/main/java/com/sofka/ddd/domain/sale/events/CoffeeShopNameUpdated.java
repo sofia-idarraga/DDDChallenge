@@ -7,7 +7,7 @@ public class CoffeeShopNameUpdated extends DomainEvent {
     private final CoffeeShopName coffeeShopName;
 
     public CoffeeShopNameUpdated(CoffeeShopName coffeeShopName) {
-        super("ddd.domain.cafe.CoffeeShopNameUpdated");
+        super("ddd.domain.sale.CoffeeShopNameUpdated");
         this.coffeeShopName = coffeeShopName;
     }
 

@@ -2,24 +2,25 @@ package com.sofka.ddd.domain.sale.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.ddd.domain.sale.values.Name;
+import com.sofka.ddd.domain.sale.values.Price;
 import com.sofka.ddd.domain.sale.values.ProductID;
 
-public class ProductNameUpdated extends DomainEvent {
+public class ProductPriceUpdated extends DomainEvent {
 
     private final ProductID productID;
-    public final Name name;
+    public final Price price;
 
-    public ProductNameUpdated(ProductID productID, Name name) {
-        super("ddd.domain.sale.ProductNameUpdated");
+    public ProductPriceUpdated( ProductID productID, Price price) {
+        super("ddd.domain.sale.ProductPriceUpdated");
         this.productID = productID;
-        this.name = name;
+        this.price = price;
     }
 
     public ProductID getProductID() {
         return productID;
     }
 
-    public Name getName() {
-        return name;
+    public Price getPrice() {
+        return price;
     }
 }
