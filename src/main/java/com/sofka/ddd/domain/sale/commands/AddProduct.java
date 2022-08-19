@@ -23,7 +23,7 @@ public class AddProduct extends Command {
         this.type=type;
     }
 
-    public SaleID getCafeID() {
+    public SaleID getSaleID() {
         return saleID;
     }
 
