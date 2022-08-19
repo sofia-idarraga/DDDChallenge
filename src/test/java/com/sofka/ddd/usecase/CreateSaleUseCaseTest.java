@@ -37,5 +37,4 @@ class CreateSaleUseCaseTest {
         //Assert
         assertEquals(command.getCoffeeShopName().value(),event.getCoffeeShopName().value());
     }
-
 }

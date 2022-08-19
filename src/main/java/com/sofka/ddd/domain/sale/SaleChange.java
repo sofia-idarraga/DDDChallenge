@@ -52,6 +52,12 @@ public class SaleChange extends EventChange {
             if(numberOfClients == 6){
                 throw new IllegalArgumentException("Maximum amount of clients reached");
             }
+            sale.clients.add(new Client(
+                    event.getClientID(),
+                    event.getName(),
+                    event.getContactNumber(),
+                    event.getVipStatus()
+            ));
         });
 
         apply((ProductAdded event) ->{

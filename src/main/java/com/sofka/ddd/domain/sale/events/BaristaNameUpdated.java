@@ -9,7 +9,7 @@ public class BaristaNameUpdated extends DomainEvent {
     public final BaristaID baristaID;
     public final Name name;
 
-    public BaristaNameUpdated(String type, BaristaID baristaID, Name name) {
+    public BaristaNameUpdated(BaristaID baristaID, Name name) {
         super("ddd.domain.sale.BaristaNameUpdated");
         this.baristaID = baristaID;
         this.name = name;
