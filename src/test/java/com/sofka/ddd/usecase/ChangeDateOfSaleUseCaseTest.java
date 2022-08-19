@@ -59,7 +59,6 @@ class ChangeDateOfSaleUseCaseTest {
         assertEquals("13/08/2022", event.getDateOfSale().value());
         assertNotEquals("12/08/2022", event.getDateOfSale().value());
         Mockito.verify(repository).getEventsBy(SALE_ID);
-
     }
 
 }

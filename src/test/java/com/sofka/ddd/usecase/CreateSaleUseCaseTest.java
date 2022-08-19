@@ -37,4 +37,32 @@ class CreateSaleUseCaseTest {
         //Assert
         assertEquals(command.getCoffeeShopName().value(),event.getCoffeeShopName().value());
     }
+
+    @Test
+    public void createSaleCaseTest_DateError(){
+        //Arrange
+        var id = new SaleID();
+        var name = new CoffeeShopName("Starbucks");
+
+        var message = assertThrows(IllegalArgumentException.class,()->{
+           var date = new DateOfSale("12 08 2022");
+
+            CreateSale command = new CreateSale(id,name,date);
+            CreateSaleUseCase useCase = new CreateSaleUseCase();
+
+            //Act
+            var events = UseCaseHandler
+                    .getInstance()
+                    .syncExecutor(useCase, new RequestCommand<>(command))
+                    .orElseThrow(()->new IllegalArgumentException("Something went wrong creating sale"))
+                    .getDomainEvents();
+
+            SaleCreated event = (SaleCreated) events.get(0);
+        }).getMessage();
+
+
+
+        //Assert
+        assertEquals("The VO Date of Sale don't match the pattern: dd/MM/yyyy",message);
+    }
 }
