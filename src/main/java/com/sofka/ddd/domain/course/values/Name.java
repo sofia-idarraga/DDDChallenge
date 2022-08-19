@@ -17,7 +17,6 @@ public class Name implements ValueObject<String> {
             throw new IllegalArgumentException("The VO name can't have less than 5 letters");
         }
     }
-
     @Override
     public String value() {
         return value;
@@ -35,4 +34,5 @@ public class Name implements ValueObject<String> {
     public int hashCode() {
         return Objects.hash(value);
     }
+
 }

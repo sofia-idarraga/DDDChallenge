@@ -7,7 +7,7 @@ import com.sofka.ddd.domain.sale.values.Name;
 public class ClientNameUpdated extends DomainEvent {
 
     private final ClientID clientID;
-    public final Name name;
+    private final Name name;
 
     public ClientNameUpdated(ClientID clientID, Name name) {
         super("ddd.domain.sale.ClientNameUpdated");

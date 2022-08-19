@@ -7,7 +7,7 @@ import com.sofka.ddd.domain.sale.values.Type;
 public class ProductTypeChanged extends DomainEvent {
 
     private final ProductID productID;
-    public final Type type;
+    private final Type type;
 
     public ProductTypeChanged( ProductID productID, Type type) {
         super("ddd.domain.sale.ProductTypeUpdated");

@@ -7,7 +7,7 @@ import com.sofka.ddd.domain.sale.values.ContactNumber;
 public class ClientContactNumberUpdated extends DomainEvent {
 
     private final ClientID clientID;
-    public final ContactNumber contactNumber;
+    private final ContactNumber contactNumber;
 
     public ClientContactNumberUpdated(ClientID clientID, ContactNumber contactNumber) {
         super("ddd.domain.sale.ClientContactNumberUpdated");

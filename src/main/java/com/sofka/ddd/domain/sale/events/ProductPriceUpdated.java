@@ -7,7 +7,7 @@ import com.sofka.ddd.domain.sale.values.ProductID;
 public class ProductPriceUpdated extends DomainEvent {
 
     private final ProductID productID;
-    public final Price price;
+    private final Price price;
 
     public ProductPriceUpdated( ProductID productID, Price price) {
         super("ddd.domain.sale.ProductPriceUpdated");

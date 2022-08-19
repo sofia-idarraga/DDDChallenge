@@ -6,8 +6,8 @@ import com.sofka.ddd.domain.sale.values.Hour;
 
 public class BaristaEntranceHourChanged extends DomainEvent {
 
-    public final BaristaID baristaID;
-    public final Hour entranceHour;
+    private final BaristaID baristaID;
+    private final Hour entranceHour;
 
     public BaristaEntranceHourChanged(BaristaID baristaID, Hour entranceHour) {
         super("ddd.domain.sale.BaristaEntranceHourChanged");
