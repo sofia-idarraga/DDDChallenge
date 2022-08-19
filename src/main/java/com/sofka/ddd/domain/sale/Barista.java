@@ -35,15 +35,15 @@ public class Barista extends Entity<BaristaID> {
         return outHour;
     }
 
-    public void updateName(Name name){
+    public void updateName(Name name) {
         this.name = Objects.requireNonNull(name);
     }
 
-    public void changeEntranceHour(Hour entranceHour){
+    public void changeEntranceHour(Hour entranceHour) {
         this.entranceHour = Objects.requireNonNull(entranceHour);
     }
 
-    public void changeOutHour(Hour outHour){
+    public void changeOutHour(Hour outHour) {
         this.outHour = Objects.requireNonNull(outHour);
     }
 

@@ -44,5 +44,7 @@ public class Product extends Entity<ProductID> {
         this.price = Objects.requireNonNull(price);
     }
 
-    public void changeType(Type type){this.type = Objects.requireNonNull(type);}
+    public void changeType(Type type) {
+        this.type = Objects.requireNonNull(type);
+    }
 }

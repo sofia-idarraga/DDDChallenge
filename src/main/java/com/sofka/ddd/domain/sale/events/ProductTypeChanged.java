@@ -1,7 +1,6 @@
 package com.sofka.ddd.domain.sale.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
-import com.sofka.ddd.domain.sale.values.Price;
 import com.sofka.ddd.domain.sale.values.ProductID;
 import com.sofka.ddd.domain.sale.values.Type;
 

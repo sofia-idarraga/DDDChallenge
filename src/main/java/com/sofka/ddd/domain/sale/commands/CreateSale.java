@@ -12,10 +12,10 @@ public class CreateSale extends Command {
 
     private final DateOfSale dateOfSale;
 
-    public CreateSale(SaleID saleID, CoffeeShopName coffeeShopName, DateOfSale dateOfSale){
+    public CreateSale(SaleID saleID, CoffeeShopName coffeeShopName, DateOfSale dateOfSale) {
         this.saleID = saleID;
         this.coffeeShopName = coffeeShopName;
-        this.dateOfSale =dateOfSale;
+        this.dateOfSale = dateOfSale;
     }
 
     public SaleID getSaleID() {
@@ -25,6 +25,7 @@ public class CreateSale extends Command {
     public DateOfSale getDateOfSale() {
         return dateOfSale;
     }
+
     public CoffeeShopName getCoffeeShopName() {
         return coffeeShopName;
     }

@@ -33,7 +33,7 @@ public class Client extends Entity<ClientID> {
         return vipStatus;
     }
 
-    public void updateName(Name name){
+    public void updateName(Name name) {
         this.name = Objects.requireNonNull(name);
     }
 

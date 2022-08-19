@@ -11,7 +11,7 @@ public class SaleCreated extends DomainEvent {
     private final DateOfSale dateOfSale;
 
 
-    public SaleCreated(CoffeeShopName coffeeShopName, DateOfSale dateOfSale){
+    public SaleCreated(CoffeeShopName coffeeShopName, DateOfSale dateOfSale) {
         super("ddd.domain.sale.SaleCreated");
         this.coffeeShopName = coffeeShopName;
         this.dateOfSale = dateOfSale;

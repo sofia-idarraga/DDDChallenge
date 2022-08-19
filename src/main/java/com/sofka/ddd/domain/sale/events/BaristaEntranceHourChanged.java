@@ -9,7 +9,7 @@ public class BaristaEntranceHourChanged extends DomainEvent {
     public final BaristaID baristaID;
     public final Hour entranceHour;
 
-    public BaristaEntranceHourChanged( BaristaID baristaID, Hour entranceHour) {
+    public BaristaEntranceHourChanged(BaristaID baristaID, Hour entranceHour) {
         super("ddd.domain.sale.BaristaEntranceHourChanged");
         this.baristaID = baristaID;
         this.entranceHour = entranceHour;

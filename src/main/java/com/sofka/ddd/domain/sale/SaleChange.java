@@ -21,8 +21,8 @@ import java.util.HashSet;
 
 public class SaleChange extends EventChange {
 
-    public SaleChange(Sale sale){
-        apply((SaleCreated event)->{
+    public SaleChange(Sale sale) {
+        apply((SaleCreated event) -> {
             sale.coffeeShopName = event.getCoffeeShopName();
             sale.dateOfSale = event.getDateOfSale();
             sale.baristas = new HashSet<>();
@@ -30,15 +30,15 @@ public class SaleChange extends EventChange {
             sale.products = new HashSet<>();
         });
 
-        apply((CoffeeShopNameUpdated event) ->{
+        apply((CoffeeShopNameUpdated event) -> {
             sale.coffeeShopName = event.getCoffeeShopName();
         });
 
-        apply((DateOfSaleChanged event)->{
+        apply((DateOfSaleChanged event) -> {
             sale.dateOfSale = event.getDateOfSale();
         });
 
-        apply((BaristaAdded event)->{
+        apply((BaristaAdded event) -> {
             sale.baristas.add(new Barista(
                     event.getBaristaID(),
                     event.getName(),
@@ -47,9 +47,9 @@ public class SaleChange extends EventChange {
             ));
         });
 
-        apply((ClientAdded event)->{
+        apply((ClientAdded event) -> {
             var numberOfClients = sale.clients().size();
-            if(numberOfClients == 6){
+            if (numberOfClients == 6) {
                 throw new IllegalArgumentException("Maximum amount of clients reached");
             }
             sale.clients.add(new Client(
@@ -60,66 +60,66 @@ public class SaleChange extends EventChange {
             ));
         });
 
-        apply((ProductAdded event) ->{
+        apply((ProductAdded event) -> {
             sale.products.add(new Product(
                     event.getEntityID(),
                     event.getName(),
                     event.getPrice(),
                     event.getType()
-                    ));
+            ));
         });
 
-        apply((ProductNameUpdated event)->{
+        apply((ProductNameUpdated event) -> {
             var product = sale.getProductById(event.getProductID())
-                    .orElseThrow(()->new IllegalArgumentException("Product ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Product ID doesn't exist"));
             product.updateName(event.getName());
         });
 
-        apply((ProductPriceUpdated event)->{
+        apply((ProductPriceUpdated event) -> {
             var product = sale.getProductById(event.getProductID())
-                    .orElseThrow(()->new IllegalArgumentException("Product ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Product ID doesn't exist"));
             product.updatePrice(event.getPrice());
         });
 
-        apply((ProductTypeChanged event)->{
+        apply((ProductTypeChanged event) -> {
             var product = sale.getProductById(event.getProductID())
-                    .orElseThrow(()->new IllegalArgumentException("Product ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Product ID doesn't exist"));
             product.changeType(event.getType());
         });
 
-        apply((ClientNameUpdated event)->{
+        apply((ClientNameUpdated event) -> {
             var client = sale.getClientById(event.getClientID())
-                    .orElseThrow(()-> new IllegalArgumentException("Client ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client ID doesn't exist"));
             client.updateName(event.getName());
         });
 
-        apply((ClientContactNumberUpdated event)->{
+        apply((ClientContactNumberUpdated event) -> {
             var client = sale.getClientById(event.getClientID())
-                    .orElseThrow(()-> new IllegalArgumentException("Client ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client ID doesn't exist"));
             client.updateContactNumber(event.getContactNumber());
         });
 
-        apply((ClientVipStatusUpdated event)->{
+        apply((ClientVipStatusUpdated event) -> {
             var client = sale.getClientById(event.getClientID())
-                    .orElseThrow(()-> new IllegalArgumentException("Client ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Client ID doesn't exist"));
             client.updateVipStatus(event.getVipStatus());
         });
 
-        apply((BaristaNameUpdated event)->{
+        apply((BaristaNameUpdated event) -> {
             var barista = sale.getBaristaById(event.getBaristaID())
-                    .orElseThrow(()-> new IllegalArgumentException("Barista ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Barista ID doesn't exist"));
             barista.updateName(event.getName());
         });
 
-        apply((BaristaEntranceHourChanged event)->{
+        apply((BaristaEntranceHourChanged event) -> {
             var barista = sale.getBaristaById(event.getBaristaID())
-                    .orElseThrow(()-> new IllegalArgumentException("Barista ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Barista ID doesn't exist"));
             barista.changeEntranceHour(event.getEntranceHour());
         });
 
-        apply((BaristaOutHourChanged event)->{
+        apply((BaristaOutHourChanged event) -> {
             var barista = sale.getBaristaById(event.getBaristaID())
-                    .orElseThrow(()-> new IllegalArgumentException("Barista ID doesn't exist"));
+                    .orElseThrow(() -> new IllegalArgumentException("Barista ID doesn't exist"));
             barista.changeEntranceHour(event.getOutHour());
         });
     }
