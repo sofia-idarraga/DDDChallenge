@@ -14,7 +14,7 @@ public class IncreaseCoursePriceUseCase extends UseCase<TriggeredEvent<MaterialA
     public void executeUseCase(TriggeredEvent<MaterialAdded> materialAddedTriggeredEvent) {
         var event = materialAddedTriggeredEvent.getDomainEvent();
         var course = Course.from(CourseID.of(event.aggregateRootId()), this.retrieveEvents());
-        course.increaseCoursePrice(course.getMaterialById(event.getMaterialID()).get());
+        course.increaseCoursePrice();
         emit().onResponse(new ResponseEvents(course.getUncommittedChanges()));
     }
 }

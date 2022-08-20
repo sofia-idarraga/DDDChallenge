@@ -88,8 +88,8 @@ public class Course extends AggregateEvent<CourseID> {
         }
     }
 
-    public void increaseCoursePrice(Material material){
-        var newPrice = parseInt(this.price().value()) + parseInt(material.quantity().value())*2;
+    public void increaseCoursePrice(){
+        var newPrice = parseInt(this.price().value()) + 2;
         this.changePrice(new Price(Integer.toString(newPrice)));
     }
 

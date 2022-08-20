@@ -68,7 +68,7 @@ class IncreaseCoursePriceUseCaseTest {
 
         //Assert
         assertEquals(COURSE_ID, event.aggregateRootId());
-        assertEquals("14",event.getPrice().value());
+        assertEquals("12",event.getPrice().value());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
         System.out.println("New Price: " + event.getPrice().value());
 
