@@ -1,7 +1,7 @@
 package com.sofka.ddd.domain.course;
 
 import co.com.sofka.domain.generic.AggregateEvent;
-import com.sofka.ddd.domain.course.Instructor;
+import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.ddd.domain.course.events.AttendeeAdded;
 import com.sofka.ddd.domain.course.events.AttendeeAgeUpdated;
 import com.sofka.ddd.domain.course.events.AttendeeEmailUpdated;
@@ -33,6 +33,7 @@ import com.sofka.ddd.domain.course.values.Quantity;
 import com.sofka.ddd.domain.course.values.Specialty;
 import com.sofka.ddd.domain.generics.CoffeeShopName;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -55,6 +56,12 @@ public class Course extends AggregateEvent<CourseID> {
     private Course(CourseID courseID) {
         super(courseID);
         subscribe(new CourseChange(this));
+    }
+
+    public static Course from(CourseID courseID, List<DomainEvent> events){
+        var course = new Course(courseID);
+        events.forEach(course::applyEvent);
+        return course;
     }
 
     //-------------- FINDERS
