@@ -2,6 +2,9 @@ package com.sofka.ddd.domain.course;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.sofka.ddd.domain.course.events.AttendeeAdded;
+import com.sofka.ddd.domain.course.events.AttendeeAgeUpdated;
+import com.sofka.ddd.domain.course.events.AttendeeEmailUpdated;
+import com.sofka.ddd.domain.course.events.AttendeeNameUpdated;
 import com.sofka.ddd.domain.course.events.CourseCreated;
 import com.sofka.ddd.domain.course.events.CourseNameChanged;
 import com.sofka.ddd.domain.course.events.DateOfCourseChanged;
@@ -9,6 +12,9 @@ import com.sofka.ddd.domain.course.events.InstructorAdded;
 import com.sofka.ddd.domain.course.events.InstructorEmailUpdated;
 import com.sofka.ddd.domain.course.events.InstructorSpecialtyChanged;
 import com.sofka.ddd.domain.course.events.MaterialAdded;
+import com.sofka.ddd.domain.course.events.MaterialDescriptionUpdated;
+import com.sofka.ddd.domain.course.events.MaterialNameUpdated;
+import com.sofka.ddd.domain.course.events.MaterialQuantityUpdated;
 import com.sofka.ddd.domain.course.events.PriceChanged;
 import com.sofka.ddd.domain.sale.events.CoffeeShopNameUpdated;
 
@@ -83,5 +89,43 @@ public class CourseChange extends EventChange {
             var instructor = course.instructor();
             instructor.updateEmail(event.getEmail());
         });
+
+        apply((AttendeeNameUpdated event) -> {
+            var attendee = course.getAttendeeById(event.getAttendeeID())
+                    .orElseThrow(() -> new IllegalArgumentException("Attendee ID doesn't exist"));
+            attendee.updateName(event.getName());
+        });
+
+        apply((AttendeeEmailUpdated event) -> {
+            var attendee = course.getAttendeeById(event.getAttendeeID())
+                    .orElseThrow(() -> new IllegalArgumentException("Attendee ID doesn't exist"));
+            attendee.updateEmail(event.getEmail());
+        });
+
+        apply((AttendeeAgeUpdated event) -> {
+            var attendee = course.getAttendeeById(event.getAttendeeID())
+                    .orElseThrow(() -> new IllegalArgumentException("Attendee ID doesn't exist"));
+            attendee.updateAge(event.getAge());
+        });
+
+        apply((MaterialNameUpdated event) -> {
+            var material = course.getMaterialById(event.getMaterialID())
+                    .orElseThrow(() -> new IllegalArgumentException("Material ID doesn't exist"));
+
+            material.updateName(event.getName());
+        });
+
+        apply((MaterialQuantityUpdated event)->{
+            var material = course.getMaterialById(event.getMaterialID())
+                    .orElseThrow(() -> new IllegalArgumentException("Material ID doesn't exist"));
+            material.updateQuantity(event.getQuantity());
+        });
+
+        apply((MaterialDescriptionUpdated event)->{
+            var material = course.getMaterialById(event.getMaterialID())
+                    .orElseThrow(() -> new IllegalArgumentException("Material ID doesn't exist"));
+            material.updateDescription(event.getDescription());
+        });
+
     }
 }
