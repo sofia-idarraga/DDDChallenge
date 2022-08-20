@@ -38,6 +38,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import static java.lang.Integer.parseInt;
+
 public class Course extends AggregateEvent<CourseID> {
 
     protected CoffeeShopName coffeeShopName;
@@ -76,6 +78,15 @@ public class Course extends AggregateEvent<CourseID> {
     //------------
 
     //----------- BEHAVIORS
+
+    public void increaseMaterialQuantity(){
+        var materials = this.materials();
+        for (Material material: materials) {
+            var actualQuantity = material.quantity().value();
+            var newValue = parseInt(actualQuantity)+1;
+            this.updateMaterialQuantity(material.identity(),new Quantity(Integer.toString(newValue)));
+        }
+    }
 
     public void updateCoffeeShopName(CoffeeShopName coffeeShopName) {
         Objects.requireNonNull(coffeeShopName);

@@ -3,17 +3,17 @@ package com.sofka.ddd.usecase;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
-import com.sofka.ddd.domain.course.commands.AddAttendee;
-import com.sofka.ddd.domain.course.events.AttendeeAdded;
+import com.sofka.ddd.domain.course.commands.AddMaterial;
 import com.sofka.ddd.domain.course.events.CourseCreated;
-import com.sofka.ddd.domain.course.values.Age;
-import com.sofka.ddd.domain.course.values.AttendeeID;
+import com.sofka.ddd.domain.course.events.MaterialAdded;
 import com.sofka.ddd.domain.course.values.CourseID;
 import com.sofka.ddd.domain.course.values.CourseName;
 import com.sofka.ddd.domain.course.values.DateOfCourse;
-import com.sofka.ddd.domain.course.values.Email;
+import com.sofka.ddd.domain.course.values.Description;
+import com.sofka.ddd.domain.course.values.MaterialID;
 import com.sofka.ddd.domain.course.values.Name;
 import com.sofka.ddd.domain.course.values.Price;
+import com.sofka.ddd.domain.course.values.Quantity;
 import com.sofka.ddd.domain.generics.CoffeeShopName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class AddAttendeeUseCaseTest {
+class AddMaterialUseCaseTest {
 
     private final String COURSE_ID = "111";
 
@@ -34,7 +34,8 @@ class AddAttendeeUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void addAttendeeTest() {
+    void addMaterialTest(){
+
         //Arrange
         var courseID = CourseID.of(COURSE_ID);
         var courseName = new CourseName("All about ColdBrew");
@@ -45,13 +46,13 @@ class AddAttendeeUseCaseTest {
         CourseCreated courseCreated = new CourseCreated(coffeeShopName, price, dateOfCourse, courseName);
         courseCreated.setAggregateRootId(COURSE_ID);
 
-        var attendeeID = new AttendeeID();
-        var attendeeName = new Name("Sofia Idarraga");
-        var email = new Email("sofiaidarraga@email.com");
-        var attendeeAge = new Age("24");
+        var materialID = new MaterialID();
+        var name = new Name("Coffee");
+        var quantity = new Quantity("2");
+        var description = new Description("Grinded coffee, 500g per Quantity");
 
-        AddAttendee command = new AddAttendee(courseID, attendeeID, attendeeName, email, attendeeAge);
-        AddAttendeeUseCase useCase = new AddAttendeeUseCase();
+        AddMaterial command = new AddMaterial(courseID,materialID,name,quantity,description);
+        AddMaterialUseCase useCase = new AddMaterialUseCase();
 
         Mockito.when(repository.getEventsBy(COURSE_ID))
                 .thenReturn(List.of(courseCreated));
@@ -62,17 +63,18 @@ class AddAttendeeUseCaseTest {
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(COURSE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
-                .orElseThrow(() -> new IllegalArgumentException("Something went wrong adding attendee"))
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong adding material"))
                 .getDomainEvents();
 
-        AttendeeAdded event = (AttendeeAdded) events.get(0);
+        MaterialAdded event = (MaterialAdded) events.get(0);
 
         //Assert
-        assertEquals("Sofia Idarraga", event.getName().value());
+        assertEquals("Coffee",event.getName().value());
         assertEquals(COURSE_ID, event.aggregateRootId());
-        assertEquals(attendeeID.value(), event.getAttendeeID().value());
-        assertEquals("sofiaidarraga@email.com", event.getEmail().value());
+        assertEquals(materialID.value(), event.getMaterialID().value());
+        assertEquals("Grinded coffee, 500g per Quantity", event.getDescription().value());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
-        System.out.println("AttendeeId: "+attendeeID.value());
+        System.out.println("MaterialId: "+materialID.value());
     }
+
 }
