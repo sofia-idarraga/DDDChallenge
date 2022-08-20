@@ -11,4 +11,8 @@ public class CourseNameChanged extends DomainEvent {
         super("ddd.domain.course.CourseNameChanged");
         this.courseName = courseName;
     }
+
+    public CourseName courseName() {
+        return courseName;
+    }
 }

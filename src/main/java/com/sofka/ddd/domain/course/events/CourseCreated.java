@@ -1,6 +1,7 @@
 package com.sofka.ddd.domain.course.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.ddd.domain.course.Instructor;
 import com.sofka.ddd.domain.course.values.CourseName;
 import com.sofka.ddd.domain.course.values.DateOfCourse;
 import com.sofka.ddd.domain.course.values.Price;
@@ -12,6 +13,7 @@ public class CourseCreated extends DomainEvent {
     private final Price price;
     private final DateOfCourse dateOfCourse;
     private final CourseName courseName;
+
 
     public CourseCreated(CoffeeShopName coffeeShopName, Price price, DateOfCourse dateOfCourse, CourseName courseName) {
         super("ddd.domain.course.CourseCreated");
