@@ -32,7 +32,7 @@ class AddClientUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void addClientTest(){
+    void addClientTest() {
         // Arrange
         var saleID = new SaleID().of(SALE_ID);
         var clientID = new ClientID();
@@ -42,10 +42,10 @@ class AddClientUseCaseTest {
         var coffeeShopName = new CoffeeShopName("Starbucks");
         var date = new DateOfSale("12/08/2022");
 
-        SaleCreated saleCreated = new SaleCreated(coffeeShopName,date);
+        SaleCreated saleCreated = new SaleCreated(coffeeShopName, date);
         saleCreated.setAggregateRootId(SALE_ID);
 
-        AddClient command = new AddClient(saleID,clientID,clientName,number,vip);
+        AddClient command = new AddClient(saleID, clientID, clientName, number, vip);
         AddClientUseCase useCase = new AddClientUseCase();
 
         Mockito.when(repository.getEventsBy(SALE_ID))
@@ -57,14 +57,14 @@ class AddClientUseCaseTest {
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(SALE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
-                .orElseThrow(()->new IllegalArgumentException("Something went wrong adding client"))
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong adding client"))
                 .getDomainEvents();
         var event = (ClientAdded) events.get(0);
 
 
         //Assert
-        assertEquals("12345",event.getContactNumber().value());
-        assertEquals("Bryan",event.getName().value());
+        assertEquals("12345", event.getContactNumber().value());
+        assertEquals("Bryan", event.getName().value());
         Mockito.verify(repository).getEventsBy(SALE_ID);
     }
 }

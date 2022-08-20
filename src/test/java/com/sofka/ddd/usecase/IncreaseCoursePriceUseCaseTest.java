@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class IncreaseCoursePriceUseCaseTest {
@@ -71,7 +71,5 @@ class IncreaseCoursePriceUseCaseTest {
         assertEquals("12",event.getPrice().value());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
         System.out.println("New Price: " + event.getPrice().value());
-
     }
-
 }

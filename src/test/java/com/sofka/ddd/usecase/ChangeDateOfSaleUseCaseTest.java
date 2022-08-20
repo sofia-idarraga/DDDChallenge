@@ -17,7 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
 class ChangeDateOfSaleUseCaseTest {
@@ -28,7 +29,7 @@ class ChangeDateOfSaleUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void changeDateOfSaleTest(){
+    void changeDateOfSaleTest() {
 
         // Arrange
         var saleID = new SaleID().of(SALE_ID);
@@ -36,10 +37,10 @@ class ChangeDateOfSaleUseCaseTest {
         var date = new DateOfSale("12/08/2022");
         var newDate = new DateOfSale("13/08/2022");
 
-        SaleCreated saleCreated = new SaleCreated(coffeeShopName,date);
+        SaleCreated saleCreated = new SaleCreated(coffeeShopName, date);
         saleCreated.setAggregateRootId(SALE_ID);
 
-        ChangeDateOfSale command = new ChangeDateOfSale(saleID,newDate);
+        ChangeDateOfSale command = new ChangeDateOfSale(saleID, newDate);
         ChangeDateOfSaleUseCase useCase = new ChangeDateOfSaleUseCase();
 
         Mockito.when(repository.getEventsBy(SALE_ID))
@@ -50,7 +51,7 @@ class ChangeDateOfSaleUseCaseTest {
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(SALE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
-                .orElseThrow(()->new IllegalArgumentException("Something went wrong changing date"))
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong changing date"))
                 .getDomainEvents();
 
         var event = (DateOfSaleChanged) events.get(0);

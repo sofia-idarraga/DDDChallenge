@@ -60,7 +60,7 @@ public class Course extends AggregateEvent<CourseID> {
         subscribe(new CourseChange(this));
     }
 
-    public static Course from(CourseID courseID, List<DomainEvent> events){
+    public static Course from(CourseID courseID, List<DomainEvent> events) {
         var course = new Course(courseID);
         events.forEach(course::applyEvent);
         return course;
@@ -79,16 +79,16 @@ public class Course extends AggregateEvent<CourseID> {
 
     //----------- BEHAVIORS
 
-    public void increaseMaterialQuantity(){
+    public void increaseMaterialQuantity() {
         var materials = this.materials();
-        for (Material material: materials) {
+        for (Material material : materials) {
             var actualQuantity = material.quantity().value();
-            var newValue = parseInt(actualQuantity)+1;
-            this.updateMaterialQuantity(material.identity(),new Quantity(Integer.toString(newValue)));
+            var newValue = parseInt(actualQuantity) + 1;
+            this.updateMaterialQuantity(material.identity(), new Quantity(Integer.toString(newValue)));
         }
     }
 
-    public void increaseCoursePrice(){
+    public void increaseCoursePrice() {
         var newPrice = parseInt(this.price().value()) + 2;
         this.changePrice(new Price(Integer.toString(newPrice)));
     }

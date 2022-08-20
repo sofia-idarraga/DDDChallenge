@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class AddAttendeeUseCaseTest {
@@ -73,6 +73,6 @@ class AddAttendeeUseCaseTest {
         assertEquals(attendeeID.value(), event.getAttendeeID().value());
         assertEquals("sofiaidarraga@email.com", event.getEmail().value());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
-        System.out.println("AttendeeId: "+attendeeID.value());
+        System.out.println("AttendeeId: " + attendeeID.value());
     }
 }

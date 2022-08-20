@@ -20,7 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class AddBaristaUseCaseTest {
@@ -31,7 +31,7 @@ class AddBaristaUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void addBaristaTest(){
+    void addBaristaTest() {
         // Arrange
         var saleID = new SaleID().of(SALE_ID);
         var baristaID = new BaristaID();
@@ -41,10 +41,10 @@ class AddBaristaUseCaseTest {
         var coffeeShopName = new CoffeeShopName("Starbucks");
         var date = new DateOfSale("12/08/2022");
 
-        SaleCreated saleCreated = new SaleCreated(coffeeShopName,date);
+        SaleCreated saleCreated = new SaleCreated(coffeeShopName, date);
         saleCreated.setAggregateRootId(SALE_ID);
 
-        AddBarista command = new AddBarista(saleID,baristaID,baristaName,entranceHour,outHour);
+        AddBarista command = new AddBarista(saleID, baristaID, baristaName, entranceHour, outHour);
         AddBaristaUseCase useCase = new AddBaristaUseCase();
 
         Mockito.when(repository.getEventsBy(SALE_ID))
@@ -56,12 +56,12 @@ class AddBaristaUseCaseTest {
         var events = UseCaseHandler.getInstance()
                 .setIdentifyExecutor(SALE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
-                .orElseThrow(()->new IllegalArgumentException("Something went wrong adding barista"))
+                .orElseThrow(() -> new IllegalArgumentException("Something went wrong adding barista"))
                 .getDomainEvents();
         var event = (BaristaAdded) events.get(0);
 
         //Assert
-        assertEquals("Sara Parker",event.getName().value());
+        assertEquals("Sara Parker", event.getName().value());
         assertEquals(baristaID.value(), event.getBaristaID().value());
         Mockito.verify(repository).getEventsBy(SALE_ID);
 

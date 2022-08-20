@@ -40,9 +40,9 @@ class CreateCourseUseCaseTest {
         CourseCreated event = (CourseCreated) events.get(0);
 
         //Assert
-        assertEquals(command.getCoffeeShopName().value(),event.getCoffeeShopName().value());
-        assertEquals("20/08/2022",event.getDateOfCourse().value());
-        assertEquals("10",event.getPrice().value());
+        assertEquals(command.getCoffeeShopName().value(), event.getCoffeeShopName().value());
+        assertEquals("20/08/2022", event.getDateOfCourse().value());
+        assertEquals("10", event.getPrice().value());
 
     }
 

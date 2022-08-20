@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class AddMaterialUseCaseTest {
@@ -34,7 +34,7 @@ class AddMaterialUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void addMaterialTest(){
+    void addMaterialTest() {
 
         //Arrange
         var courseID = CourseID.of(COURSE_ID);
@@ -51,7 +51,7 @@ class AddMaterialUseCaseTest {
         var quantity = new Quantity("2");
         var description = new Description("Grinded coffee, 500g per Quantity");
 
-        AddMaterial command = new AddMaterial(courseID,materialID,name,quantity,description);
+        AddMaterial command = new AddMaterial(courseID, materialID, name, quantity, description);
         AddMaterialUseCase useCase = new AddMaterialUseCase();
 
         Mockito.when(repository.getEventsBy(COURSE_ID))
@@ -69,12 +69,12 @@ class AddMaterialUseCaseTest {
         MaterialAdded event = (MaterialAdded) events.get(0);
 
         //Assert
-        assertEquals("Coffee",event.getName().value());
+        assertEquals("Coffee", event.getName().value());
         assertEquals(COURSE_ID, event.aggregateRootId());
         assertEquals(materialID.value(), event.getMaterialID().value());
         assertEquals("Grinded coffee, 500g per Quantity", event.getDescription().value());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
-        System.out.println("MaterialId: "+materialID.value());
+        System.out.println("MaterialId: " + materialID.value());
     }
 
 }

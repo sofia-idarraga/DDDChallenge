@@ -24,7 +24,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
 class UpdateInstructorEmailUseCaseTest {
@@ -75,7 +76,7 @@ class UpdateInstructorEmailUseCaseTest {
         assertEquals(instructorID.value(), event.getInstructorID().value());
         assertEquals(COURSE_ID, event.aggregateRootId());
         Mockito.verify(repository).getEventsBy(COURSE_ID);
-        System.out.println("InstructorID: "+instructorID.value());
+        System.out.println("InstructorID: " + instructorID.value());
     }
 
 }

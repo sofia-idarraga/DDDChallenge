@@ -6,7 +6,7 @@ import co.com.sofka.business.support.ResponseEvents;
 import com.sofka.ddd.domain.sale.Sale;
 import com.sofka.ddd.domain.sale.commands.CreateSale;
 
-public class CreateSaleUseCase extends UseCase<RequestCommand<CreateSale>, ResponseEvents>{
+public class CreateSaleUseCase extends UseCase<RequestCommand<CreateSale>, ResponseEvents> {
 
     @Override
     public void executeUseCase(RequestCommand<CreateSale> createCafeRequestCommand) {
