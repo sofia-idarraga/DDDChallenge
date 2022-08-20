@@ -115,17 +115,16 @@ public class CourseChange extends EventChange {
             material.updateName(event.getName());
         });
 
-        apply((MaterialQuantityUpdated event)->{
+        apply((MaterialQuantityUpdated event) -> {
             var material = course.getMaterialById(event.getMaterialID())
                     .orElseThrow(() -> new IllegalArgumentException("Material ID doesn't exist"));
             material.updateQuantity(event.getQuantity());
         });
 
-        apply((MaterialDescriptionUpdated event)->{
+        apply((MaterialDescriptionUpdated event) -> {
             var material = course.getMaterialById(event.getMaterialID())
                     .orElseThrow(() -> new IllegalArgumentException("Material ID doesn't exist"));
             material.updateDescription(event.getDescription());
         });
-
     }
 }

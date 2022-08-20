@@ -9,7 +9,7 @@ public class AttendeeEmailUpdated extends DomainEvent {
     private final AttendeeID attendeeID;
     private final Email email;
 
-    public AttendeeEmailUpdated(String type, AttendeeID attendeeID, Email email) {
+    public AttendeeEmailUpdated(AttendeeID attendeeID, Email email) {
         super("ddd.domain.course.AttendeeEmailUpdated");
         this.attendeeID = attendeeID;
         this.email = email;

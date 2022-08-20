@@ -9,7 +9,7 @@ public class AttendeeNameUpdated extends DomainEvent {
     private final AttendeeID attendeeID;
     private final Name name;
 
-    public AttendeeNameUpdated(String type, AttendeeID attendeeID, Name name) {
+    public AttendeeNameUpdated(AttendeeID attendeeID, Name name) {
         super("ddd.domain.course.AttendeeNameUpdated");
         this.attendeeID = attendeeID;
         this.name = name;
