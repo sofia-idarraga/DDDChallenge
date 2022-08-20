@@ -9,13 +9,14 @@ import com.sofka.ddd.domain.course.values.Specialty;
 
 public class AddInstructor extends Command {
 
-    private CourseID courseID;
+    private final CourseID courseID;
     private final InstructorID instructorID;
     private final Name name;
     private final Email email;
     private final Specialty specialty;
 
     public AddInstructor(CourseID courseID, InstructorID instructorID, Name name, Email email, Specialty specialty) {
+        this.courseID = courseID;
         this.instructorID = instructorID;
         this.name = name;
         this.email = email;

@@ -7,11 +7,12 @@ import com.sofka.ddd.domain.course.values.Specialty;
 
 public class ChangeInstructorSpecialty extends Command {
 
-    private CourseID courseID;
+    private final CourseID courseID;
     private final InstructorID instructorID;
     private final Specialty specialty;
 
     public ChangeInstructorSpecialty(CourseID courseID, InstructorID instructorID, Specialty specialty) {
+        this.courseID = courseID;
         this.instructorID = instructorID;
         this.specialty = specialty;
     }

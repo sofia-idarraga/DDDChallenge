@@ -1,21 +1,15 @@
 package com.sofka.ddd.domain.course.commands;
 
 import co.com.sofka.domain.generic.Command;
+import com.sofka.ddd.domain.course.values.Age;
 import com.sofka.ddd.domain.course.values.AttendeeID;
 import com.sofka.ddd.domain.course.values.CourseID;
-import com.sofka.ddd.domain.course.values.Email;
 
-public class UpdateAttendeeEmail extends Command {
+public class UpdateAttendeeAge extends Command {
 
     private final CourseID courseID;
     private final AttendeeID attendeeID;
-    private final Email email;
-
-    public UpdateAttendeeEmail(CourseID courseID,AttendeeID attendeeID, Email email) {
-        this.courseID = courseID;
-        this.attendeeID = attendeeID;
-        this.email = email;
-    }
+    private final Age age;
 
     public CourseID getCourseID() {
         return courseID;
@@ -25,7 +19,13 @@ public class UpdateAttendeeEmail extends Command {
         return attendeeID;
     }
 
-    public Email getEmail() {
-        return email;
+    public Age getAge() {
+        return age;
+    }
+
+    public UpdateAttendeeAge(CourseID courseID, AttendeeID attendeeID, Age age) {
+        this.courseID = courseID;
+        this.attendeeID = attendeeID;
+        this.age = age;
     }
 }
